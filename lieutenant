@@ -1,0 +1,19 @@
+#!/usr/bin/env lua5.3
+lt = require('lieutenant')
+
+template = lt(io.stdin):load()
+
+for i, arg in ipairs({...}) do
+    k, v = arg:match('^([%w_]+)=(.*)$')
+    if k then
+        template.vars[k] = v
+    end
+end
+
+template.globals.comments = {
+    'Hello, World!',
+    "I'm Nelson!"
+}
+
+io.stdout:write(template:parse())
+
