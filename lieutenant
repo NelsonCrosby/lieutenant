@@ -1,13 +1,12 @@
 #!/usr/bin/env lua5.3
+-- vim: set filetype=lua :
 lt = require('lieutenant')
 
 template = lt(io.stdin):load()
 
 for i, arg in ipairs({...}) do
     k, v = arg:match('^([%w_]+)=(.*)$')
-    if k then
-        template.vars[k] = v
-    end
+    if k then template.globals[k] = v end
 end
 
 template.globals.comments = {
